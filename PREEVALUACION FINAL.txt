@@ -1,0 +1,10 @@
+evaluacion de programacion final 
+1.poner todos los nombres registrados con su informacion, la que estan A de aprobados.
+2.hacer el promedio de cada seccion(A,B,C)
+3.decir cual seccion fue el que tiene el promedio de mas valor
+
+el archivo es:
+nombre		apellido		seccion		plata
+juan		poo			A		458.35
+goo		ñoo			C		28.1
+lilo		ram			B		3000.5

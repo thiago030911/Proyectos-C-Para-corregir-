@@ -1,0 +1,55 @@
+Asiento. 1 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 2 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 3 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 4 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 5 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 6 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 7 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 8 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 9 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 10 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 11 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 12 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 13 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 14 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 15 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 16 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 17 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ Asiento. 18 	 Estado: Libre 
+ ID:  
+ DNI: 0 
+ 

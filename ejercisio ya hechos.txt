@@ -1,0 +1,319 @@
+1. Hacer un programa en Java para:
+a. Mostrar por pantalla el texto: “Bienvenido a Java”.
+b. Determinar cual es menor de tres valores dados
+(A, B y C). 
+(COPIAR Y PEGAR TAL COMO ESTA)
+
+CUARPO PRINCIPAL:
+
+package practica;
+
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author susana
+ */
+public class Main {
+
+    public static void main(String[] args) {
+       JOptionPane.showMessageDialog(null, "Hola mundo");
+       Comparacion primero = new Comparacion();
+       primero.ejecutar();
+    }
+}
+
+
+
+CUARPOS SECUNDARIOS:
+package practica;
+
+import javax.swing.JOptionPane;
+
+public class Comparacion {
+
+    private int a;
+    private int b;
+    private int c;
+    private String num1;
+    private String num2;
+    private String num3;
+
+    /**
+     *
+     */
+    public Comparacion() {
+//        this.a = a;
+//        this.b = b;
+//        this.c = c;
+//        this.num1 = num1;
+//        this.num2 = num2;
+//        this.num3 = num3;
+    }
+    public void ejecutar()
+    {
+    num1 = JOptionPane.showInputDialog("Ingrese el primer numero:");
+    a=Integer.parseInt(num1);
+    num2 = JOptionPane.showInputDialog("Ingrese el segundo numero:");
+    b=Integer.parseInt(num2);
+    num3 = JOptionPane.showInputDialog("Ingrese el tercero numero:");
+    c=Integer.parseInt(num3);
+    if(a>b){
+            if (a>c) {
+                System.out.println("el primer numero es el mayor");
+            }
+    }
+    else
+    {if(b>c){
+                System.out.println("el segundo numero es el mayor");
+    }
+    else
+    {System.out.println("el tercer numero es el mayor");
+    }
+    }
+    }
+    }
+    
+}
+
+*********************************************************************************
+
+C_Imprimir los 20 primeros números enteros
+positivos. 
+
+CUERPO PRINCIPAL:
+ int i;
+       for (i = 1; i <= 20; i++) {
+            System.out.println(i);
+       }
+
+*********************************************************************************
+
+D_Sumar los 1000 primeros números naturales
+(1+2+3+4+...+1000), imprimiendo por cada suma el
+resultado parcial obtenido.
+
+CUERPO PRINCIPAL:
+int i,a;
+int acu = 1;
+       for (i = 2; i <= 100; i++) {
+           a = acu + i;
+            System.out.println(acu + " + " + i +"=" +a);
+            acu = a;
+       }
+
+*********************************************************************************
+
+2. Defina una clase punto que tendrá dos atributos, de
+tipo real, x e y, que representarán las coordenadas del
+punto dentro del plano. Defina un método que tenga
+como argumento otro objeto de la clase punto y que
+calcule la distancia entre los dos puntos. Para probar
+esta funcionalidad, escriba un método main en el que
+se creen dos puntos, el primero de los cuales deberá
+tener las coordenadas 100.0, 200.0 y el segundo
+deberá tener las coordenadas 400.0, 800.0 y calcule e
+imprima la distancia entre ambos.
+
+CUERPO PRINCIPAL:
+
+ Punto p1 = new Punto();
+
+1° CUERPO SECUNDARIO:
+package practica;
+
+/**
+ *
+ * @author susana
+ */
+public class Punto {
+    private final Distancia prueba;
+    
+    public Punto(){
+        System.out.println("hola");
+        prueba = new Distancia(100,200,400,800);
+    }
+    public void ejecutar (){
+    
+    }
+    
+    }
+
+2° CUERPO SECUNDARIO:
+
+package practica;
+
+/**
+ *
+ * @author susana
+ */
+public class Distancia {
+private int xacum1;
+private int yacum1;
+    
+    public Distancia(int x,int y,int x1,int y2){
+        xacum1 = x-x1;
+        yacum1 = y-y2;
+        
+        System.out.println("La distancia que hay entre los dos puntos son X= "+xacum1+" Y= "+yacum1);
+    }
+//    public void Calculo (int x,int y,int x1,int y2){
+//        
+//        
+//    }
+}
+
+*********************************************************************************
+PROGRAMA DE EJEMPLO DE BUFFEREADREADER:
+import java.io.BufferedReader;
+import java.io.IOException;
+//import java.io.IOException;
+import java.io.InputStreamReader;
+/**
+ *
+ * @author susana
+ */
+public class Cabeza {
+    public static void main(String[] args) throws IOException {
+//        Proceso inicio = new Proceso();
+//        inicio.ejecutar();
+BufferedReader bufer = new BufferedReader(new InputStreamReader(System.in));
+int x;
+float y;
+double z;
+boolean b;
+char c;
+String entrada;
+String cadena;
+System.out.println("Programa que lee datos");
+System.out.println("Escribe un valor entero: ");
+entrada = bufer.readLine();
+x = Integer.parseInt(entrada);
+System.out.println("Escribe un valor flotante: ");
+entrada = bufer.readLine();
+y = Float.parseFloat(entrada);
+System.out.println("Escribe un valor double: ");
+entrada = bufer.readLine();
+z = Double.parseDouble(entrada);
+System.out.println("Escribe un valor booleano: ");
+entrada = bufer.readLine();
+b = Boolean.parseBoolean(entrada);
+System.out.println("Escribe un caracter: ");
+entrada = bufer.readLine();
+c = entrada.charAt(0);
+System.out.println("Escribe una cadena de caracteres: ");
+entrada = bufer.readLine();
+cadena = entrada;
+System.out.println("Mostrando los datos introducidos: ");
+System.out.println("El valor entero es: " + x);
+System.out.println("El valor flotante es: " + y);
+System.out.println("El valor double es: " + z);
+System.out.println("El valor booleano es: " + b);
+System.out.println("El caracter es: " + c);
+System.out.println("La cadena de caracteres es: " + cadena);
+    }
+    
+}
+
+*********************************************************************************
+
+3. Defina una clase que permita calcular la suma, media y
+el máximo de una lista de números enteros positivos
+que se introducen por teclado; la entrada acabará
+cuando se introduzca un número entero negativo. Para
+leer por la entrada estándar puede utilizar el método
+readLine() de la clase BufferedReader y para identificar
+el entero leído, el método "int Integer.parseInt(String)". 
+
+CUERPO PRINCIPAL: 
+ Lectura p2 = new Lectura();
+        p2.suma();
+
+CUERPO SECUNDARIO: 
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+/**
+ *
+ * @author susana
+ */
+public class Lectura {
+
+    private int acum1;
+    private int acum2;
+    private int acum3;
+    private int sum;
+    private String letra1;
+
+    
+    //private String letra2:
+    
+    public Lectura() {
+        //BufferedReader bufer = new BufferedReader(new InputStreamReader(System.in));   
+    }
+
+    public void suma () throws IOException{
+        BufferedReader bufer = new BufferedReader(new InputStreamReader(System.in));
+        acum1 = 1;
+        acum2 = 0;
+        acum3 = 0;
+        sum = 0;
+        while (acum1 > 0) {
+            System.out.println("Escriba el numero que quiere ingresar: ");
+            letra1 = bufer.readLine();
+            acum1 = Integer.parseInt(letra1);
+            sum = sum + acum1;
+            if (acum1 > acum3) {
+                acum3 = acum1;
+                acum2 = acum1;
+            } else {
+                acum2 = acum3;
+            }
+        }
+        System.out.println("la suma de todos los numeros son =" + sum);
+        System.out.println("el numero mayor de todos los numeros =" + acum2);
+    }
+}
+
+*********************************************************************************
+5. Escriba un programa que calcule la capacidad de un
+disco duro de un ordenador que tiene 12000 cilindros,
+16 pistas, 8 sectores por pista y sectores de 512 bytes.
+Exprese su tamaño en bytes, kilobytes, megabytes y
+gigabytes. El tamaño del disco se calcula de acuerdo
+con la siguiente fórmula: capacidad = cilindros * pistas *
+sectores * bytes. Un kilobyte son 1024 byts. Un
+megabyte son (kilobyte * 1024) bytes. Un gigabyte es
+(megabyte * 1024) bytes 
+
+CUERPO PRINCIPAL:
+Capacidad p3 = new Capacidad();
+p3.ejecutar(1200, 16, 8, 512);
+
+CUERPO SECUNDARIO: 
+public class Capacidad {
+
+    private int a1;
+    private int a2;
+    private int a3;
+    private int a4;
+
+    public Capacidad() {
+    }
+
+    public void ejecutar(int x, int y, int e, int w) {
+        a4 = x * y * e * w;
+        a1 = a4 / 1024;
+        a2 = a1 * 1024;
+        a3 = a2 * 1024;
+        System.out.println("Kilobyte= "+a1);
+        System.out.println("Megabyte= "+a2);
+        System.out.println("Gigabyte= "+a3);
+
+    }
+}
+
+CUERPO PRINCIPAL:
+

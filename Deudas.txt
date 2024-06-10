@@ -1,0 +1,12 @@
+Codigo|Nombre|Apelli|Catego|Estado|Deuda
+12|Papo|ernan|1|I|1200
+2|Pepo|Delav|2|I|1400
+15|Gere|Mias|1|A|800
+11|Samuel|Loco|1|A|300 
+24|More|oca|3|A|100
+8|Papo|Fernan|2|I|0
+1|Papo|Fernan|3|A|2150
+13|Mono|Mano|1|I|3000 
+9|Meme|alsa|2|I|8450
+100|Gere|Mias|3|A|10000
+.

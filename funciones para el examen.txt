@@ -1,0 +1,401 @@
+
+
+
+El controlador: 
+
+ public void ejecutar() {
+        v.mostrar();
+        v.addBotonListener(new ConsultaListener());
+    }
+
+    private class ConsultaListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            m.consultar(v.getTextField1(), v.getTextField2()); // se fija si se conocen
+            v.mostrarCadena(m.getResultadoConsulta()); // prengunta el resultado y lo mete en el textField3
+        }
+    }
+
+
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.sql.*;
+import java.util.TreeSet;
+
+
+
+funcion para no repetir caracter:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+gridx y gridy señalan la posición del control en la matriz, el control seleccionado (titulado 1) esta en la fila cero y en la columna 0. Cada uno de los controles tiene una unidad de anchura y una unidad de altura tal como especifica las propiedades gridwidth y gridheight.
+
+
+
+propiedad fill de su valor BOTH a NONE. Vemos que el control 1 está anclado (Anchor) en la parte superior izquierda (NORTHWEST)
+
+
+la propiedad fill de NONE a HORIZONTAL
+
+
+connection = obtenerConexion();
+        TreeSet<String> nombres = new TreeSet<String>();
+        String query1, query2;
+        query1 = "SELECT " + campo2 + " FROM " + tabla + " WHERE " + campo1 + " = '" + nomComienzo + "';"; // consulta desde columna nombres a conoce
+        query2 = "SELECT " + campo1 + " FROM " + tabla + " WHERE " + campo2 + " = '" + nomComienzo + "';"; // consulta desde columna conoce a nombres
+
+        try {
+            Statement statement = connection.createStatement(); // statment de query1
+            ResultSet resultSet = statement.executeQuery(query1); // resulset de query1
+            Statement statement2 = connection.createStatement(); // statment de query2
+            ResultSet resultSet2 = statement2.executeQuery(query2); // resulset de query2
+
+            while (resultSet.next()) {
+                nombres.add(resultSet.getString(campo2)); // carga el TreeSet desde la columna nombres a conoce
+            }
+
+            while (resultSet2.next()) {
+                nombres.add(resultSet2.getString(campo1)); // carga el TreeSet desde la columna conoce a nombres
+            }
+
+            resultadoConsulta = 1; // contador de grados
+            if (nombres.contains(nomDestino)) { //  compraracion del primer grado
+                resultSet.close();
+                statement.close();
+                resultSet2.close();
+                statement2.close();
+            } else {
+
+                boolean conocido = false; // variable para ver si se conocen
+
+                for (int i = 0; i < 6 && !conocido; i++) {
+                    nombres = cambiarNombres(nombres);
+                    resultadoConsulta++;
+                    if (nombres.contains(nomDestino)) {
+                        conocido = true;
+                    }
+                }
+
+                if (!conocido) { // se mete en esta condicion para 
+                    resultadoConsulta = -1; // marcar que no lo encontro en SEX GRADES
+                }
+            }
+
+            resultSet.close();
+            statement.close();
+            resultSet2.close();
+            statement2.close();
+        } catch (SQLException ex) {
+            reportException(ex.getMessage());
+        }
+
+funcion para cambiar: 
+
+ private TreeSet<String> cambiarNombres(TreeSet<String> nombres) {
+        TreeSet<String> elFUA = new TreeSet<String>(); // es un array pero no agrega repetidos
+
+        for (String n : nombres) {
+            System.out.println();
+
+            String query = "SELECT " + campo2 + " FROM " + tabla + " WHERE " + campo1 + " = '" + n + "';"; // consulta desde columna nombres a conoce
+            String query2 = "SELECT " + campo1 + " FROM " + tabla + " WHERE " + campo2 + " = '" + n + "';"; // consulta desde columna conoce a nombres
+            try {
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                Statement statement2 = connection.createStatement();
+                ResultSet resultSet2 = statement2.executeQuery(query2);
+
+                while (resultSet.next()) {
+                    elFUA.add(resultSet.getString(campo2)); // carga el TreeSet desde la columna nombres a conoce
+                }
+                while (resultSet2.next()) {
+                    elFUA.add(resultSet2.getString(campo1)); // carga el TreeSet desde la columna conoce a nombres 
+                }
+                resultSet.close();
+                statement.close();
+                resultSet2.close();
+                statement2.close();
+            } catch (SQLException ex) {
+                reportException(ex.getMessage());
+            }
+        }
+
+        return elFUA;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private String driver;
+    private String prefijoConexion;
+    private String ip;
+    private String usr;
+    private String psw;
+    private String bd;
+    private String tabla;
+    private String tituloApp;
+    private String campo1;
+    private String campo2;
+    private Connection connection;
+    private ActionListener listener;
+  driver = "com.mysql.cj.jdbc.Driver";
+        prefijoConexion = "jdbc:mysql://";
+        ip = "127.0.0.1"; // Dirección IP donde está corriendo el localhost
+        usr = ""; // Usuario
+        psw = ""; // Password
+        bd = "seisgrados";
+        tabla = "conocidos";
+        tituloApp = "Six Grades";
+        campo1 = "Nombre";
+        campo2 = "Conoce";
+
+la vista:
+private Modelo m;
+    private JFrame frame;
+    private JPanel panel1, panel2, panel3;
+    private JButton boton;
+    private JTextField textField1, textField2, textField3;
+    private JLabel label1, label2, label3;
+
+public Vista(Modelo m) {
+        this.m = m;
+        this.m.addExceptionListener(new ExceptionListener());
+        frame = new JFrame();
+        frame.setPreferredSize(new Dimension(200, 400));
+        frame.setResizable(false);
+        frame.setLayout(new BorderLayout()); // Establecer un BorderLayout en el frame
+
+        panel1 = new JPanel(new GridBagLayout());
+        panel1.setPreferredSize(new Dimension(200, 200));
+        panel1.setBackground(new Color(0, 200, 170));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+
+        label1 = new JLabel("Nombre:");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel1.add(label1, gbc);
+
+        textField1 = new JTextField(10);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        panel1.add(textField1, gbc);
+
+        label2 = new JLabel("Nombre:");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel1.add(label2, gbc);
+
+        textField2 = new JTextField(10);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        panel1.add(textField2, gbc);
+
+        frame.add(panel1, BorderLayout.WEST); // Colocar panel1 en la región oeste
+
+        panel2 = new JPanel();
+        panel2.setLayout(new GridBagLayout());
+        panel2.setBackground(new Color(0, 200, 170));
+        panel2.setPreferredSize(new Dimension(200, 200));
+        gbc = new GridBagConstraints();
+        gbc.insets = new Insets(2, 0, 2, 0); 
+        gbc.anchor = GridBagConstraints.CENTER;
+        boton = new JButton("Determinar");
+        boton.setPreferredSize(new Dimension(120, 30));
+        panel2.add(boton, gbc);
+        frame.add(panel2, BorderLayout.CENTER); // Colocar el botón en el centro
+
+        panel3 = new JPanel(new GridBagLayout());
+        panel3.setBackground(new Color(0, 200, 170));
+        panel3.setPreferredSize(new Dimension(200, 200));
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        label3 = new JLabel("Grado de separacion:");
+        panel3.add(label3, gbc);
+        gbc.gridy = 1;
+        textField3 = new JTextField(10);
+        textField3.setEditable(false);
+        panel3.add(textField3, gbc);
+
+        frame.add(panel3, BorderLayout.EAST); // Colocar panel2 en la región este
+
+        //frame.setVisible(true);
+    }
+
+    public void mostrar() {
+        frame.setTitle(m.getTituloApp());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public void addBotonListener(ActionListener al) {
+        boton.addActionListener(al);
+    }
+
+    public void mostrarExcepcion(String s) {
+        JOptionPane.showMessageDialog(frame, s, "ERROR:",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void mostrarCadena(int k) {
+        textField3.setText(Integer.toString(k));
+    }
+
+    private class ExceptionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            mostrarExcepcion(event.getActionCommand());
+        }
+    }
+
+    public String getTextField1() {
+        return textField1.getText();
+    }
+
+    public String getTextField2() {
+        return textField2.getText();
+    }
+
+main()Modelo m = new Modelo();
+        Vista v = new Vista(m);
+        Controlador c = new Controlador(m, v);
+        c.ejecutar();
+
+/*******************************************************************
+
+ this.m = m;
+        this.m.addExceptionListener(new ExceptionListener());
+        frame = new JFrame();
+        frame.setPreferredSize(new Dimension(400, 500));
+        frame.setResizable(false);   
+        frame.setLayout(new BorderLayout()); // Establecer un BorderLayout en el frame
+
+        panel1 = new JPanel(new GridBagLayout());
+        panel1.setPreferredSize(new Dimension(400, 200));
+        panel1.setBackground(new Color(0, 200, 170));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);//muetra el ancho
+        
+        label1 = new JLabel("primera esquina:");
+        gbc.gridx = 0;//columna
+        gbc.gridy = 0;//fila
+        panel1.add(label1, gbc);
+
+        label2 = new JLabel("calle 1:");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel1.add(label2, gbc);
+
+        textField1 = new JTextField(10);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        panel1.add(textField1, gbc);
+
+        label3 = new JLabel("calle 2:");
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        panel1.add(label3, gbc);
+
+        textField2 = new JTextField(10);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        panel1.add(textField2, gbc);
+        
+        //***************************************************************************************
+        
+        label4 = new JLabel("segunda esquina:");
+        gbc.gridx = 0;//columna
+        gbc.gridy = 3;//fila
+        panel1.add(label4, gbc);
+
+        label5 = new JLabel("calle 1:");
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        panel1.add(label5, gbc);
+
+        textField3 = new JTextField(10);
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        panel1.add(textField3, gbc);
+
+        label6 = new JLabel("calle 2:");
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        panel1.add(label6, gbc);
+
+        textField4 = new JTextField(10);
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        panel1.add(textField4, gbc);
+
+        frame.add(panel1, BorderLayout.NORTH); // Colocar panel1 en la región oeste
+
+        panel2 = new JPanel();
+        panel2.setLayout(new GridBagLayout());
+        panel2.setBackground(new Color(0, 200, 170));
+        panel2.setPreferredSize(new Dimension(200, 100));
+        gbc = new GridBagConstraints();
+        gbc.insets = new Insets(2, 0, 2, 0);
+        gbc.anchor = GridBagConstraints.CENTER;
+        boton = new JButton("calgular");
+        boton.setPreferredSize(new Dimension(120, 30));
+        panel2.add(boton, gbc);
+        frame.add(panel2, BorderLayout.CENTER); // Colocar el botón en el centro
+
+        panel3 = new JPanel(new GridBagLayout());
+        panel3.setBackground(new Color(0, 200, 170));
+        panel3.setPreferredSize(new Dimension(100, 100));
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        label3 = new JLabel("Cantidad de cruces en calle:");
+        panel3.add(label3, gbc);
+        gbc.gridx = 1;
+        textField5 = new JTextField(10);
+        textField5.setEditable(false);
+        panel3.add(textField5, gbc);
+
+        frame.add(panel3, BorderLayout.SOUTH); // Colocar panel2 en la región este
+
+        //frame.setVisible(true);
