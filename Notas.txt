@@ -1,0 +1,14 @@
+nombre-apellido-curso-promedio-inasistencias
+pepe-lomba-A-6-5
+nando-nunez-A-4-3
+jose-lameda-B-5-15
+raul-lopez-C-9-20
+pana-pona-B-6-1
+josue-herna-C-7-19
+santi-pena-A-2-14
+pana-pona-B-6-1
+pana-pona-B-6-1
+nando-nunez-A-4-3
+pepe-lomba-A-6-5
+salomon-mascherano-A-10-10
+
